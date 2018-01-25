@@ -24,7 +24,7 @@ class SoapXMLParser:
                     print (os.listdir(path + foldername))
                     filename = os.listdir(path + foldername)[0]
                     file = os.path.join(os.path.abspath(path + "matterws"), filename)
-                    print("XML file with path::"  + file)
+                    print("XML file with path:::"  + file)
         return file
 
     def fetchfeedfiles(self, path):
