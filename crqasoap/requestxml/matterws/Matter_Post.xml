@@ -1,0 +1,43 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="http://matter.ws.chromeriver.com/">
+   <soapenv:Header>
+      <mat:credentials>
+         <!--Optional:-->
+         <token></token>
+         <!--Optional:-->
+         <user>
+            <companyId>www.tab.com</companyId>
+            <userId>tabtest</userId>
+            <password>1river1</password>
+         </user>
+      </mat:credentials>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mat:inMatterCreate>
+         <matterNumber>WSA_10111170813493</matterNumber>
+         <clientNumber>1883799</clientNumber>
+         <clientName>Regular Routing0816951</clientName>
+         <!--Optional properties:-->
+         <parentClientNumber></parentClientNumber>
+         <matterName></matterName>
+         <type></type>
+         <routeIndependent></routeIndependent>
+         <closedDate></closedDate>
+         <GLAccount></GLAccount>
+         <entity1></entity1>
+         <entity2></entity2>
+         <entity3></entity3>
+         <languageCode></languageCode>
+         <currencyCode></currencyCode>
+         <UDF1></UDF1>
+         <UDF2></UDF2>
+         <UDF3></UDF3>
+         <UDF4></UDF4>
+         <UDF1PersonUniqueID></UDF1PersonUniqueID>
+         <UDF2PersonUniqueID></UDF2PersonUniqueID>
+         <UDF3PersonUniqueID></UDF3PersonUniqueID>
+         <extraLineItemData1LegalValues></extraLineItemData1LegalValues>
+         <onSelect1EntityTypeCode></onSelect1EntityTypeCode>
+         <!--Optional properties:-->
+      </mat:inMatterCreate>
+   </soapenv:Body>
+</soapenv:Envelope>
