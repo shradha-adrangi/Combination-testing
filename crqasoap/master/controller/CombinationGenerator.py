@@ -1,71 +1,32 @@
-class CombinationGenerator:
+import itertools
+
+
+class CombinationGenerator(object):
     allCombsList = []
+    pick_split_list = []
+    node_name1 = "node1-name-placeholder"
+    node_name2 = "node2-name-placeholder"
 
     def __init__(self):
         pass
 
-    def process_combination(self, attribute_list):
+    def process_combination(self, total_attributes_count, subset_seq, node_count):
+        # split num of elements per combination range into two. Eg/- (1,3,5) (2,4,6).
+        split_range = [range(1, total_attributes_count+1)[i::node_count] for i in range(node_count)]
 
-        """
-        Combination generation process starts here
-        Args:
-            attribute_list: list of n (optional) attributes for combination generation
+        # if CombinationGenerator.node_name1 == "node1-name-placeholder":
+        #     pick_split_list = split_range[1]
+        # else:
+        #     pick_split_list = split_range[0]
+        #     print "For node list initaited has length = "+ str(len(pick_split_list))
 
-        Returns:
+        self.create_combinations(split_range[subset_seq], total_attributes_count)
+        return CombinationGenerator.allCombsList
 
-        """
-        attribute_list.remove("matterNumber")
-        attribute_list.remove("clientNumber")
-        attribute_list.remove("clientName")
-
-        listlength = len(attribute_list)
-        for r in range(1, listlength+1):
-            # self.generate_combination(r, listlength)
-            comb_Array = [None] * r;
-            # print str(comb_Array)
-            self.combination_util(comb_Array, 0, listlength, 0, r)
-        print "total length:::" + str(len(CombinationGenerator.allCombsList))
-        return
-
-    def combination_util(self, comb_Array, start, end, index, numofelementincomb):
-        """
-        Formula goes here, to generate each combination
-        Args:
-            comb_Array: each unique combination generated, is put into this temp list
-            start: the pointer held on to the element in attibute list
-            eg/- for first iteration of list, [a,b,c,d,e,f] : START will be fixed on to 'a', and END will be fixed on to 'f' and then,
-            elements other than 'a' are combined with START(a), i.e [a,b] [a,c] [a,d] [a,e] [a,f] : until END is reached. And INDEX holds the index on the list
-        """
-        if index == numofelementincomb:
-            if (numofelementincomb > 1):
-                temp = ':'.join(str(x) for x in comb_Array)
-                CombinationGenerator.allCombsList.append(temp)
-            else:
-                CombinationGenerator.allCombsList.append(str(comb_Array[0]))
-            return
-        for i in range(start, end):
-            if i <= end and end-i+1 >= numofelementincomb-index:
-                comb_Array[index] = i
-                self.combination_util(comb_Array, i + 1, end, index + 1, numofelementincomb)
-        return
-
-    def initiate_process(self, attrlist):
-        """
-        Process initiator
-        Args:
-            attrlist: list of attributes to generate combinations
-        """
-        self.process_combination(attrlist)
-        split_list = self.splitcombinations(CombinationGenerator.allCombsList, 2)
-        return split_list
-
-    def splitcombinations(self, lst, n):
-        """
-        Splits the whole combination list into two sub-list
-            Args:
-        n: number of sub-list required
-        lst: list to be split
-       """
-        return [lst[i::n] for i in xrange(n)]
-
-
+    def create_combinations(self, split_range, total_attributes_count):
+        unformatted_list = []
+        attribute_list = range(1, total_attributes_count + 1)
+        for i in split_range:
+            unformatted_list += itertools.combinations(attribute_list, i)
+        CombinationGenerator.allCombsList = [list(t) for t in unformatted_list]
+        print ("total length:::" + str(len(CombinationGenerator.allCombsList)))
